@@ -63,6 +63,7 @@ function renderImages() {
     while (leftIndex === middleIndex || middleIndex === rightIndex || middleIndex === leftIndex) {
         rightIndex = getRandomIndex();
         middleIndex = getRandomIndex();
+        leftIndex = getRandomIndex();
     }
     
     leftImgElement.src = Product.all[leftIndex].imgSource;
