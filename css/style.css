@@ -16,7 +16,7 @@ main {
 }
 
 header {
-    background-image: url("img/header.jpg");
+    background-image: url("https://github.com/HaneenHaashlamoun/bus-mall/blob/main/img/header.jpg?raw=true");
     height: 130px;
     margin-bottom: 30px;
 }
@@ -121,7 +121,7 @@ button:hover {
 footer {
     clear: both;
     height: 50px;
-    background-image: url("img/header.jpg");
+    background-image: url("https://github.com/HaneenHaashlamoun/bus-mall/blob/main/img/header.jpg?raw=true");
     font-family: 'Zen Tokyo Zoo', cursive;
     padding: 20px;
     color: whitesmoke;
