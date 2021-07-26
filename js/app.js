@@ -5,6 +5,7 @@
 let leftImgElement = document.getElementById('leftImg');
 let middleImgElement = document.getElementById('middleImg');
 let rightImgElement = document.getElementById('rightImg');
+let buttonElement = document.getElementById('viewListbtn');
 
 let topAttempt = 25;
 let clientAttempts = 0;
@@ -105,8 +106,7 @@ function userClick(event) {
         renderImages();
 
     } else {
-        mainDiv.removeEventListener('click', userClick);
-        let buttonElement = document.getElementById('viewListbtn');
+        mainDiv.removeEventListener('click', userClick);        
         buttonElement.addEventListener('click', showList);
     }
 }
@@ -117,4 +117,6 @@ function showList() {
         list.appendChild(listItem);
         listItem.textContent = `${Product.all[i].name} has ${Product.all[i].votes} votes and shown ${Product.all[i].shown} times`;
     }
+    buttonElement.removeEventListener('click', showList);
+    
 }
