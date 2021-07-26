@@ -5,6 +5,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-image: url("https://github.com/HaneenHaashlamoun/bus-mall/blob/main/img/background.jpg?raw=true");
+    background-attachment: fixed;
 }
 
 main {
@@ -107,7 +108,7 @@ button:hover {
 #paragraph {
     display: block;
     height: 250px;
-    width: 750px;
+    width: 780px;
     padding: 10px;
     line-height: 30px;
     margin-bottom: 10px;
@@ -126,3 +127,9 @@ footer {
     padding: 20px;
     color: whitesmoke;
 }
+
+#chartDiv{
+    background: rgba(152, 76, 175, 0.7);
+    padding: 10px;
+}
+
