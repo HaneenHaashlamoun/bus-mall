@@ -26,6 +26,7 @@ function Product(name, src) {
     this.votes = 0;
     this.shown = 0;
     Product.all.push(this);
+    // updateStorage();
 }
 Product.all = [];
 
@@ -49,7 +50,27 @@ new Product('unicorn', 'img/unicorn.jpg');
 new Product('water-can', 'img/water-can.jpg');
 new Product('wine-glass', 'img/wine-glass.jpg');
 
-// console.log(Product.all);
+console.log(Product.all);
+
+function updateStorage() {
+    let stringArr = JSON.stringify(Product.all);
+    localStorage.setItem('product', stringArr);
+}
+
+function getProductsInfo() {
+    let data = localStorage.getItem('product');
+    let parsedArr = JSON.parse(data)    
+    if (parsedArr !== null) {
+        Product.all = parsedArr;
+        // for (let i = 0; i < parsedArr.length; i++) {
+        //     // new Product(parsedArr[i].name,parsedArr[i].votes,parsedArr[i].shown,parsedArr[i].imgSource);
+        //     productOfget = Product.create(parsedArr[i]);
+        //     productOfget.create(Product.prototype);
+        //   }
+        // console.log(Product.all);
+    }    
+}
+
 
 // from w3 schools
 function getRandomIndex() {
@@ -59,12 +80,9 @@ function getRandomIndex() {
 
 // render
 let number = [];
-
 function renderImages() {
-
-
     number = [leftIndex, middleIndex, rightIndex];
-    console.log(number);
+    // console.log(number);
     leftIndex = getRandomIndex();
     middleIndex = getRandomIndex();
     rightIndex = getRandomIndex();
@@ -85,7 +103,6 @@ function renderImages() {
     Product.all[leftIndex].shown++;
     Product.all[rightIndex].shown++;
     Product.all[middleIndex].shown++;
-
 }
 
 renderImages();
@@ -94,18 +111,17 @@ let mainDiv = document.getElementById('main-div');
 mainDiv.addEventListener('click', userClick);
 let list = document.getElementById('productsList');
 
+//Div user click
 function userClick(event) {
+    event.preventDefault();
     clientAttempts++;
     // console.log(clientAttempts);
 
     if (clientAttempts <= topAttempt) {
-
         if (event.target.id === 'leftImg') {
             Product.all[leftIndex].votes++;
-
         } else if (event.target.id === 'middleImg') {
             Product.all[rightIndex].votes++;
-
         } else if (event.target.id === 'rightImg') {
             Product.all[middleIndex].votes++;
         }
@@ -115,23 +131,24 @@ function userClick(event) {
 
         renderImages();
 
-    } else {
-
+    }
+    else {
         //chart
         for (let i = 0; i < Product.all.length; i++) {
             namesArr.push(Product.all[i].name);
             votesArr.push(Product.all[i].votes);
             shownArr.push(Product.all[i].shown);
         }
-
-
         mainDiv.removeEventListener('click', userClick);
         buttonElement.addEventListener('click', showList);
-
+        
+        // updateStorage();
 
     }
+    updateStorage();
 }
 
+//btnclick
 function showList() {
     for (let i = 0; i < Product.all.length; i++) {
         let listItem = document.createElement('li');
@@ -139,18 +156,13 @@ function showList() {
         listItem.textContent = `${Product.all[i].name} has ${Product.all[i].votes} votes and shown ${Product.all[i].shown} times`;
     }
     buttonElement.removeEventListener('click', showList);
-    console.log(votesArr, shownArr, namesArr);
+    // console.log(votesArr, shownArr, namesArr);
     showChart();
 
 }
 
 //Chart 
-
-// console.log(namesArr);
-// console.log(votesArr);
-
-
-function showChart() {    
+function showChart() {
     const data = {
         labels: namesArr,
         datasets: [{
@@ -215,9 +227,9 @@ function showChart() {
         },
     };
 
-    
+
     var myChart = new Chart(
-        
+
         document.getElementById('myChart'),
         config
     );
@@ -225,3 +237,6 @@ function showChart() {
 }
 
 Chart.defaults.color = "white";
+
+
+getProductsInfo();
